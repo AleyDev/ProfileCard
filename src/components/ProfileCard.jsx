@@ -19,22 +19,6 @@ const ProfileCard = () => {
         <h2 className="text-2xl font-bold text-[#6944ff] mb-4 mt-16">Aleyna Kaya</h2>
         <p className="text-lg font-medium text-[#324e63] mb-4">Backend Developer</p>
         
-        {/* Stats */}
-        <div className="flex justify-center flex-wrap items-start mt-9">
-          <div className="px-9 py-2.5 min-w-[150px]">
-            <div className="text-[27px] font-bold text-[#324e63]">127</div>
-            <div className="font-medium mt-1.5 text-[#324e63]">Projeler</div>
-          </div>
-          <div className="px-9 py-2.5 min-w-[150px]">
-            <div className="text-[27px] font-bold text-[#324e63]">1.2K</div>
-            <div className="font-medium mt-1.5 text-[#324e63]">Takipçiler</div>
-          </div>
-          <div className="px-9 py-2.5 min-w-[150px]">
-            <div className="text-[27px] font-bold text-[#324e63]">89</div>
-            <div className="font-medium mt-1.5 text-[#324e63]">Takip</div>
-          </div>
-        </div>
-
         {/* Social Links */}
         <div className="flex justify-center items-center flex-wrap mt-6">
           <a

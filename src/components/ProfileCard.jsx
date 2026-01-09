@@ -8,8 +8,8 @@ const ProfileCard = () => {
         <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-1/2">
           <div className="w-24 h-24 rounded-full bg-white p-1 shadow-lg">
             <img
-              src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&h=150&fit=crop&crop=face"
-              alt="Profile"
+              src="/aleyna_profile_card.jpg"
+              alt="Aleyna Kaya"
               className="w-full h-full rounded-full object-cover"
             />
           </div>

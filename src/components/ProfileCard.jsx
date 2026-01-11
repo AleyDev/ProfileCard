@@ -23,11 +23,9 @@ const ProfileCard = () => {
     // Profil resmi animasyonu
     if (imageRef.current) {
       imageRef.current.style.opacity = '0'
-      imageRef.current.style.transform = 'scale(0.8)'
       setTimeout(() => {
-        imageRef.current.style.transition = 'all 0.5s ease-out'
+        imageRef.current.style.transition = 'opacity 0.5s ease-out'
         imageRef.current.style.opacity = '1'
-        imageRef.current.style.transform = 'scale(1)'
       }, 200)
     }
 
@@ -81,12 +79,12 @@ const ProfileCard = () => {
     >
       {/* Profile Image */}
       <div className="flex justify-center -mt-[75px] relative z-10">
-        <div className="w-[150px] h-[150px] rounded-full overflow-hidden shadow-[0px_5px_50px_0px_ghostwhite,0px_0px_0px_7px_#f5f5f5]">
+        <div className="w-[150px] h-[150px] rounded-full overflow-hidden shadow-[0px_5px_50px_0px_ghostwhite,0px_0px_0px_7px_#f5f5f5] transition-transform duration-300 hover:scale-110 cursor-pointer">
           <img
             ref={imageRef}
             src="/aleyna_profile_card.jpg"
             alt="Aleyna Kaya"
-            className="w-full h-full object-cover rounded-full transition-transform duration-300 hover:scale-110"
+            className="w-full h-full object-cover rounded-full"
           />
         </div>
       </div>

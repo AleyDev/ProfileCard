@@ -137,12 +137,13 @@ const ProfileCard = () => {
 
         {/* Action Button */}
         <div className="flex justify-center items-center mt-10">
-          <button 
+        <a 
             ref={buttonRef}
-            className="bg-gradient-to-r from-[#1da1f2] to-[#0e71c8] text-white font-bold text-lg px-10 py-4 rounded-full min-w-[201px] min-h-[55px] shadow-[0px_4px_30px_rgba(19,127,212,0.4)] transition-all duration-300 hover:shadow-[0px_7px_30px_rgba(19,127,212,0.75)] hover:-translate-y-2 hover:scale-105 cursor-pointer"
+            href="mailto:devaleykaya@gmail.com"
+            className="bg-gradient-to-r from-[#1da1f2] to-[#0e71c8] text-white font-bold text-lg px-10 py-4 rounded-full min-w-[201px] min-h-[55px] shadow-[0px_4px_30px_rgba(19,127,212,0.4)] transition-all duration-300 hover:shadow-[0px_7px_30px_rgba(19,127,212,0.75)] hover:-translate-y-2 hover:scale-105 cursor-pointer inline-block text-center"
           >
             Mesaj Gönder
-          </button>
+          </a>
         </div>
       </div>
     </div>

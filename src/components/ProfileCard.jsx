@@ -9,15 +9,19 @@ const ProfileCard = () => {
           <img
             src="/aleyna_profile_card.jpg"
             alt="Aleyna Kaya"
-            className="w-full h-full object-cover rounded-full"
+            className="w-full h-full object-cover rounded-full transition-transform duration-300 hover:scale-110"
           />
         </div>
       </div>
 
       {/* Content */}
       <div className="mt-[-35px] text-center px-5 pb-10">
-        <h2 className="text-2xl font-bold text-[#6944ff] mb-4 mt-16">Aleyna Kaya</h2>
-        <p className="text-lg font-medium text-[#324e63] mb-4">Backend Developer</p>
+        <h2 className="text-2xl font-bold text-[#6944ff] mb-4 mt-16">
+          Aleyna Kaya
+        </h2>
+        <p className="text-lg font-medium text-[#324e63] mb-4">
+          Backend Developer
+        </p>
         
         {/* Social Links */}
         <div className="flex justify-center items-center flex-wrap mt-6">

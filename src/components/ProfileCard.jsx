@@ -1,12 +1,89 @@
-import React from 'react'
+import React, { useEffect, useRef } from 'react'
 
 const ProfileCard = () => {
+  const cardRef = useRef(null)
+  const imageRef = useRef(null)
+  const nameRef = useRef(null)
+  const titleRef = useRef(null)
+  const socialRef = useRef(null)
+  const buttonRef = useRef(null)
+
+  useEffect(() => {
+    // Kart animasyonu
+    if (cardRef.current) {
+      cardRef.current.style.opacity = '0'
+      cardRef.current.style.transform = 'translateY(20px)'
+      setTimeout(() => {
+        cardRef.current.style.transition = 'all 0.6s ease-out'
+        cardRef.current.style.opacity = '1'
+        cardRef.current.style.transform = 'translateY(0)'
+      }, 100)
+    }
+
+    // Profil resmi animasyonu
+    if (imageRef.current) {
+      imageRef.current.style.opacity = '0'
+      imageRef.current.style.transform = 'scale(0.8)'
+      setTimeout(() => {
+        imageRef.current.style.transition = 'all 0.5s ease-out'
+        imageRef.current.style.opacity = '1'
+        imageRef.current.style.transform = 'scale(1)'
+      }, 200)
+    }
+
+    // İsim animasyonu
+    if (nameRef.current) {
+      nameRef.current.style.opacity = '0'
+      nameRef.current.style.transform = 'translateY(10px)'
+      setTimeout(() => {
+        nameRef.current.style.transition = 'all 0.5s ease-out'
+        nameRef.current.style.opacity = '1'
+        nameRef.current.style.transform = 'translateY(0)'
+      }, 400)
+    }
+
+    // Meslek animasyonu
+    if (titleRef.current) {
+      titleRef.current.style.opacity = '0'
+      titleRef.current.style.transform = 'translateY(10px)'
+      setTimeout(() => {
+        titleRef.current.style.transition = 'all 0.5s ease-out'
+        titleRef.current.style.opacity = '1'
+        titleRef.current.style.transform = 'translateY(0)'
+      }, 500)
+    }
+
+    // Sosyal medya animasyonu
+    if (socialRef.current) {
+      socialRef.current.style.opacity = '0'
+      setTimeout(() => {
+        socialRef.current.style.transition = 'all 0.5s ease-out'
+        socialRef.current.style.opacity = '1'
+      }, 600)
+    }
+
+    // Buton animasyonu
+    if (buttonRef.current) {
+      buttonRef.current.style.opacity = '0'
+      buttonRef.current.style.transform = 'translateY(10px)'
+      setTimeout(() => {
+        buttonRef.current.style.transition = 'all 0.5s ease-out'
+        buttonRef.current.style.opacity = '1'
+        buttonRef.current.style.transform = 'translateY(0)'
+      }, 700)
+    }
+  }, [])
+
   return (
-    <div className="bg-white rounded-xl shadow-[0px_8px_60px_-10px_rgba(13,28,39,0.6)] w-full max-w-2xl mx-auto relative">
+    <div 
+      ref={cardRef}
+      className="bg-white rounded-xl shadow-[0px_8px_60px_-10px_rgba(13,28,39,0.6)] w-full max-w-2xl mx-auto relative"
+    >
       {/* Profile Image */}
       <div className="flex justify-center -mt-[75px] relative z-10">
         <div className="w-[150px] h-[150px] rounded-full overflow-hidden shadow-[0px_5px_50px_0px_ghostwhite,0px_0px_0px_7px_#f5f5f5]">
           <img
+            ref={imageRef}
             src="/aleyna_profile_card.jpg"
             alt="Aleyna Kaya"
             className="w-full h-full object-cover rounded-full transition-transform duration-300 hover:scale-110"
@@ -16,20 +93,29 @@ const ProfileCard = () => {
 
       {/* Content */}
       <div className="mt-[-35px] text-center px-5 pb-10">
-        <h2 className="text-2xl font-bold text-[#6944ff] mb-4 mt-16">
+        <h2 
+          ref={nameRef}
+          className="text-2xl font-bold text-[#6944ff] mb-4 mt-16"
+        >
           Aleyna Kaya
         </h2>
-        <p className="text-lg font-medium text-[#324e63] mb-4">
+        <p 
+          ref={titleRef}
+          className="text-lg font-medium text-[#324e63] mb-4"
+        >
           Backend Developer
         </p>
         
         {/* Social Links */}
-        <div className="flex justify-center items-center flex-wrap mt-6">
+        <div 
+          ref={socialRef}
+          className="flex justify-center items-center flex-wrap mt-6"
+        >
           <a
             href="https://github.com/aleydev"
             target="_blank"
             rel="noopener noreferrer"
-            className="w-[55px] h-[55px] rounded-full flex items-center justify-center text-white bg-gradient-to-br from-[#333333] to-[#626b73] shadow-[0px_7px_30px_rgba(63,65,67,0.6)] mx-4 transition-all duration-300 hover:scale-110"
+            className="w-[55px] h-[55px] rounded-full flex items-center justify-center text-white bg-gradient-to-br from-[#333333] to-[#626b73] shadow-[0px_7px_30px_rgba(63,65,67,0.6)] mx-4 transition-all duration-300 hover:scale-125 hover:rotate-6"
             aria-label="GitHub"
           >
             <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
@@ -40,7 +126,7 @@ const ProfileCard = () => {
             href="https://www.instagram.com/_aaleynakaya"
             target="_blank"
             rel="noopener noreferrer"
-            className="w-[55px] h-[55px] rounded-full flex items-center justify-center text-white bg-gradient-to-r from-[#405de6] via-[#5851db] via-[#833ab4] via-[#c13584] via-[#e1306c] to-[#fd1d1d] shadow-[0px_4px_30px_rgba(120,64,190,0.6)] mx-4 transition-all duration-300 hover:scale-110"
+            className="w-[55px] h-[55px] rounded-full flex items-center justify-center text-white bg-gradient-to-r from-[#405de6] via-[#5851db] via-[#833ab4] via-[#c13584] via-[#e1306c] to-[#fd1d1d] shadow-[0px_4px_30px_rgba(120,64,190,0.6)] mx-4 transition-all duration-300 hover:scale-125 hover:-rotate-6"
             aria-label="Instagram"
           >
             <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
@@ -51,7 +137,10 @@ const ProfileCard = () => {
 
         {/* Action Button */}
         <div className="flex justify-center items-center mt-10">
-          <button className="bg-gradient-to-r from-[#1da1f2] to-[#0e71c8] text-white font-bold text-lg px-10 py-4 rounded-full min-w-[201px] min-h-[55px] shadow-[0px_4px_30px_rgba(19,127,212,0.4)] transition-all duration-300 hover:shadow-[0px_7px_30px_rgba(19,127,212,0.75)] hover:-translate-y-1 cursor-pointer">
+          <button 
+            ref={buttonRef}
+            className="bg-gradient-to-r from-[#1da1f2] to-[#0e71c8] text-white font-bold text-lg px-10 py-4 rounded-full min-w-[201px] min-h-[55px] shadow-[0px_4px_30px_rgba(19,127,212,0.4)] transition-all duration-300 hover:shadow-[0px_7px_30px_rgba(19,127,212,0.75)] hover:-translate-y-2 hover:scale-105 cursor-pointer"
+          >
             Mesaj Gönder
           </button>
         </div>

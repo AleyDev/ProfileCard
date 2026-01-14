@@ -352,6 +352,7 @@ const ProfileCard = () => {
                       style={{
                         width: '0%',
                         animation: `fillProgress 1.5s ease-out ${index * 0.2}s forwards`,
+                        '--progress-width': `${skill.level}%`,
                       }}
                     />
                   </div>

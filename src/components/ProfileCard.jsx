@@ -143,7 +143,14 @@ const ProfileCard = () => {
 
         {/* Profile Image */}
         <div className="flex justify-center -mt-[75px] relative z-10">
-          <div className={`w-[150px] h-[150px] rounded-full overflow-hidden shadow-[0px_5px_50px_0px_ghostwhite,0px_0px_0px_7px_${darkMode ? '#374151' : '#f5f5f5'}] transition-all duration-300 hover:scale-110 cursor-pointer group`}>
+          <div 
+            className={`w-[150px] h-[150px] rounded-full overflow-hidden transition-all duration-300 hover:scale-110 cursor-pointer group`}
+            style={{
+              boxShadow: darkMode 
+                ? '0px 5px 50px 0px rgba(55, 65, 81, 0.5), 0px 0px 0px 7px #374151' 
+                : '0px 5px 50px 0px rgba(248, 248, 255, 0.8), 0px 0px 0px 7px #f5f5f5'
+            }}
+          >
             <img
               ref={imageRef}
               src="/aleyna_profile_card.jpg"

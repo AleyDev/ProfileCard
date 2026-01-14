@@ -18,12 +18,12 @@ const ProfileCard = () => {
   const typingSpeed = 100
 
   const skills = [
-    { name: 'JavaScript', icon: 'JS', color: 'from-yellow-400 to-yellow-600', level: 90 },
-    { name: 'Node.js', icon: 'N', color: 'from-green-500 to-green-700', level: 85 },
-    { name: 'React', icon: 'R', color: 'from-blue-400 to-blue-600', level: 80 },
-    { name: 'Python', icon: 'Py', color: 'from-blue-500 to-blue-700', level: 75 },
-    { name: 'MongoDB', icon: 'M', color: 'from-green-600 to-green-800', level: 88 },
-    { name: 'PostgreSQL', icon: 'Pg', color: 'from-blue-600 to-blue-800', level: 82 },
+    { name: 'JavaScript', icon: 'JS', color: 'from-yellow-400 to-yellow-600' },
+    { name: 'Node.js', icon: 'N', color: 'from-green-500 to-green-700' },
+    { name: 'React', icon: 'R', color: 'from-blue-400 to-blue-600' },
+    { name: 'Python', icon: 'Py', color: 'from-blue-500 to-blue-700' },
+    { name: 'MongoDB', icon: 'M', color: 'from-green-600 to-green-800' },
+    { name: 'PostgreSQL', icon: 'Pg', color: 'from-blue-600 to-blue-800' },
   ]
 
   const stats = [
@@ -56,17 +56,19 @@ const ProfileCard = () => {
         const y = e.clientY - rect.top
         const centerX = rect.width / 2
         const centerY = rect.height / 2
-        const rotateX = (y - centerY) / 20
-        const rotateY = (centerX - x) / 20
+        const rotateX = (y - centerY) / 15
+        const rotateY = (centerX - x) / 15
 
         setMousePosition({ x: rotateY, y: rotateX })
-        cardRef.current.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`
+        cardRef.current.style.transform = `perspective(1000px) rotateX(${-rotateX}deg) rotateY(${rotateY}deg) scale(1.02)`
+        cardRef.current.style.transition = 'none'
       }
     }
 
     const handleMouseLeave = () => {
       if (cardRef.current) {
-        cardRef.current.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg)'
+        cardRef.current.style.transition = 'transform 0.5s ease-out'
+        cardRef.current.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)'
         setMousePosition({ x: 0, y: 0 })
       }
     }
@@ -240,9 +242,10 @@ const ProfileCard = () => {
 
       <div 
         ref={cardRef}
-        className={`${darkMode ? 'bg-gray-800' : 'bg-white'} rounded-xl shadow-[0px_8px_60px_-10px_rgba(13,28,39,0.6)] w-full max-w-2xl mx-auto relative transition-all duration-300`}
+        className={`${darkMode ? 'bg-gray-800' : 'bg-white'} rounded-xl shadow-[0px_8px_60px_-10px_rgba(13,28,39,0.6)] w-full max-w-2xl mx-auto relative`}
         style={{
           transformStyle: 'preserve-3d',
+          transition: 'transform 0.5s ease-out',
         }}
       >
         {/* Dark Mode Toggle */}
@@ -332,30 +335,14 @@ const ProfileCard = () => {
             <h3 className={`${darkMode ? 'text-gray-300' : 'text-gray-700'} text-sm font-semibold mb-4 transition-colors duration-300`}>
               Teknolojiler
             </h3>
-            <div className="flex flex-col gap-4 px-4">
+            <div className="flex justify-center items-center flex-wrap gap-3">
               {skills.map((skill, index) => (
-                <div key={index} className="w-full">
-                  <div className="flex justify-between items-center mb-2">
-                    <div className={`flex items-center gap-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>
-                      <div className={`bg-gradient-to-br ${skill.color} w-10 h-10 rounded-lg flex items-center justify-center text-white font-bold text-xs shadow-lg`}>
-                        {skill.icon}
-                      </div>
-                      <span className="font-medium text-sm">{skill.name}</span>
-                    </div>
-                    <span className={`text-xs font-semibold ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>
-                      {skill.level}%
-                    </span>
-                  </div>
-                  <div className={`${darkMode ? 'bg-gray-700' : 'bg-gray-200'} h-2 rounded-full overflow-hidden`}>
-                    <div
-                      className={`bg-gradient-to-r ${skill.color} h-full rounded-full progress-bar`}
-                      style={{
-                        width: '0%',
-                        animation: `fillProgress 1.5s ease-out ${index * 0.2 + 1}s forwards`,
-                        '--target-width': `${skill.level}%`,
-                      }}
-                    />
-                  </div>
+                <div
+                  key={index}
+                  className={`bg-gradient-to-br ${skill.color} w-14 h-14 rounded-lg flex items-center justify-center text-white font-bold text-sm shadow-lg transition-all duration-300 hover:scale-110 hover:rotate-3 cursor-default`}
+                  title={skill.name}
+                >
+                  {skill.icon}
                 </div>
               ))}
             </div>
@@ -406,7 +393,7 @@ const ProfileCard = () => {
             <a 
               ref={buttonRef}
               href="mailto:devaleykaya@gmail.com"
-              className="bg-gradient-to-r from-[#1da1f2] to-[#0e71c8] text-white font-bold text-lg px-8 py-4 rounded-full min-w-[180px] min-h-[55px] shadow-[0px_4px_30px_rgba(19,127,212,0.4)] transition-all duration-300 hover:shadow-[0px_7px_30px_rgba(19,127,212,0.75)] hover:-translate-y-2 hover:scale-105 cursor-pointer inline-block text-center"
+              className="bg-gradient-to-r from-[#1da1f2] to-[#0e71c8] text-white font-bold text-lg px-10 py-4 rounded-full min-w-[201px] min-h-[55px] shadow-[0px_4px_30px_rgba(19,127,212,0.4)] transition-all duration-300 hover:shadow-[0px_7px_30px_rgba(19,127,212,0.75)] hover:-translate-y-2 hover:scale-105 cursor-pointer inline-block text-center"
             >
               Mesaj Gönder
             </a>
@@ -417,9 +404,12 @@ const ProfileCard = () => {
                 // CV indirme işlevi buraya eklenebilir
                 alert('CV indirme özelliği yakında eklenecek!')
               }}
-              className={`${darkMode ? 'bg-gradient-to-r from-gray-600 to-gray-800' : 'bg-gradient-to-r from-gray-700 to-gray-900'} text-white font-bold text-lg px-8 py-4 rounded-full min-w-[180px] min-h-[55px] shadow-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-2 hover:scale-105 cursor-pointer inline-block text-center`}
+              className={`${darkMode ? 'bg-gray-700' : 'bg-gray-600'} w-[55px] h-[55px] rounded-full flex items-center justify-center text-white shadow-lg transition-all duration-300 hover:scale-125 hover:rotate-6`}
+              title="CV İndir"
             >
-              CV İndir
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+              </svg>
             </a>
           </div>
         </div>

@@ -350,7 +350,7 @@ const ProfileCard = () => {
                     <div
                       className={`bg-gradient-to-r ${skill.color} h-full rounded-full progress-bar`}
                       style={{
-                        width: `${skill.level}%`,
+                        width: '0%',
                         animation: `fillProgress 1.5s ease-out ${index * 0.2 + 1}s forwards`,
                         '--target-width': `${skill.level}%`,
                       }}

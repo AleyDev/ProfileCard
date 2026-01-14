@@ -1,12 +1,31 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 
 const ProfileCard = () => {
+  const [darkMode, setDarkMode] = useState(false)
   const cardRef = useRef(null)
   const imageRef = useRef(null)
   const nameRef = useRef(null)
   const titleRef = useRef(null)
+  const bioRef = useRef(null)
+  const skillsRef = useRef(null)
+  const statsRef = useRef(null)
   const socialRef = useRef(null)
   const buttonRef = useRef(null)
+
+  const skills = [
+    { name: 'JavaScript', icon: 'JS', color: 'from-yellow-400 to-yellow-600' },
+    { name: 'Node.js', icon: 'N', color: 'from-green-500 to-green-700' },
+    { name: 'React', icon: 'R', color: 'from-blue-400 to-blue-600' },
+    { name: 'Python', icon: 'Py', color: 'from-blue-500 to-blue-700' },
+    { name: 'MongoDB', icon: 'M', color: 'from-green-600 to-green-800' },
+    { name: 'PostgreSQL', icon: 'Pg', color: 'from-blue-600 to-blue-800' },
+  ]
+
+  const stats = [
+    { label: 'Projeler', value: '25+', icon: '📁' },
+    { label: 'Yıllık Deneyim', value: '3+', icon: '💼' },
+    { label: 'GitHub Stars', value: '150+', icon: '⭐' },
+  ]
 
   useEffect(() => {
     // Kart animasyonu
@@ -51,13 +70,40 @@ const ProfileCard = () => {
       }, 500)
     }
 
+    // Bio animasyonu
+    if (bioRef.current) {
+      bioRef.current.style.opacity = '0'
+      setTimeout(() => {
+        bioRef.current.style.transition = 'all 0.5s ease-out'
+        bioRef.current.style.opacity = '1'
+      }, 600)
+    }
+
+    // Skills animasyonu
+    if (skillsRef.current) {
+      skillsRef.current.style.opacity = '0'
+      setTimeout(() => {
+        skillsRef.current.style.transition = 'all 0.5s ease-out'
+        skillsRef.current.style.opacity = '1'
+      }, 700)
+    }
+
+    // Stats animasyonu
+    if (statsRef.current) {
+      statsRef.current.style.opacity = '0'
+      setTimeout(() => {
+        statsRef.current.style.transition = 'all 0.5s ease-out'
+        statsRef.current.style.opacity = '1'
+      }, 800)
+    }
+
     // Sosyal medya animasyonu
     if (socialRef.current) {
       socialRef.current.style.opacity = '0'
       setTimeout(() => {
         socialRef.current.style.transition = 'all 0.5s ease-out'
         socialRef.current.style.opacity = '1'
-      }, 600)
+      }, 900)
     }
 
     // Buton animasyonu
@@ -68,9 +114,13 @@ const ProfileCard = () => {
         buttonRef.current.style.transition = 'all 0.5s ease-out'
         buttonRef.current.style.opacity = '1'
         buttonRef.current.style.transform = 'translateY(0)'
-      }, 700)
+      }, 1000)
     }
   }, [])
+
+  const toggleDarkMode = () => {
+    setDarkMode(!darkMode)
+  }
 
   return (
     <div 

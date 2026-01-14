@@ -348,11 +348,11 @@ const ProfileCard = () => {
                   </div>
                   <div className={`${darkMode ? 'bg-gray-700' : 'bg-gray-200'} h-2 rounded-full overflow-hidden`}>
                     <div
-                      className={`bg-gradient-to-r ${skill.color} h-full rounded-full transition-all duration-1000 ease-out`}
+                      className={`bg-gradient-to-r ${skill.color} h-full rounded-full progress-bar`}
                       style={{
-                        width: '0%',
-                        animation: `fillProgress 1.5s ease-out ${index * 0.2}s forwards`,
-                        '--progress-width': `${skill.level}%`,
+                        width: `${skill.level}%`,
+                        animation: `fillProgress 1.5s ease-out ${index * 0.2 + 1}s forwards`,
+                        '--target-width': `${skill.level}%`,
                       }}
                     />
                   </div>

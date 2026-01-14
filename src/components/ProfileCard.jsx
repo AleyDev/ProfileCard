@@ -131,7 +131,7 @@ const ProfileCard = () => {
         {/* Dark Mode Toggle */}
         <button
           onClick={toggleDarkMode}
-          className="absolute top-4 right-4 w-12 h-12 rounded-full bg-gradient-to-br from-gray-700 to-gray-900 dark:from-yellow-400 dark:to-yellow-600 flex items-center justify-center shadow-lg transition-all duration-300 hover:scale-110 z-20"
+          className={`absolute top-4 right-4 w-12 h-12 rounded-full ${darkMode ? 'bg-gradient-to-br from-yellow-400 to-yellow-600' : 'bg-gradient-to-br from-gray-700 to-gray-900'} flex items-center justify-center shadow-lg transition-all duration-300 hover:scale-110 z-20`}
           aria-label="Toggle dark mode"
         >
           {darkMode ? (

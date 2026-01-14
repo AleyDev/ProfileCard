@@ -2,6 +2,8 @@ import React, { useEffect, useRef, useState } from 'react'
 
 const ProfileCard = () => {
   const [darkMode, setDarkMode] = useState(false)
+  const [typedText, setTypedText] = useState('')
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
   const cardRef = useRef(null)
   const imageRef = useRef(null)
   const nameRef = useRef(null)
@@ -12,20 +14,114 @@ const ProfileCard = () => {
   const socialRef = useRef(null)
   const buttonRef = useRef(null)
 
+  const titleText = 'Backend Developer'
+  const typingSpeed = 100
+
   const skills = [
-    { name: 'JavaScript', icon: 'JS', color: 'from-yellow-400 to-yellow-600' },
-    { name: 'Node.js', icon: 'N', color: 'from-green-500 to-green-700' },
-    { name: 'React', icon: 'R', color: 'from-blue-400 to-blue-600' },
-    { name: 'Python', icon: 'Py', color: 'from-blue-500 to-blue-700' },
-    { name: 'MongoDB', icon: 'M', color: 'from-green-600 to-green-800' },
-    { name: 'PostgreSQL', icon: 'Pg', color: 'from-blue-600 to-blue-800' },
+    { name: 'JavaScript', icon: 'JS', color: 'from-yellow-400 to-yellow-600', level: 90 },
+    { name: 'Node.js', icon: 'N', color: 'from-green-500 to-green-700', level: 85 },
+    { name: 'React', icon: 'R', color: 'from-blue-400 to-blue-600', level: 80 },
+    { name: 'Python', icon: 'Py', color: 'from-blue-500 to-blue-700', level: 75 },
+    { name: 'MongoDB', icon: 'M', color: 'from-green-600 to-green-800', level: 88 },
+    { name: 'PostgreSQL', icon: 'Pg', color: 'from-blue-600 to-blue-800', level: 82 },
   ]
 
   const stats = [
-    { label: 'Projeler', value: '25+', icon: '📁' },
-    { label: 'Yıllık Deneyim', value: '3+', icon: '💼' },
-    { label: 'GitHub Stars', value: '150+', icon: '⭐' },
+    { label: 'Projeler', value: 25, icon: '📁', suffix: '+' },
+    { label: 'Yıllık Deneyim', value: 3, icon: '💼', suffix: '+' },
+    { label: 'GitHub Stars', value: 150, icon: '⭐', suffix: '+' },
   ]
+
+  // Typing animation
+  useEffect(() => {
+    let currentIndex = 0
+    const typingInterval = setInterval(() => {
+      if (currentIndex < titleText.length) {
+        setTypedText(titleText.slice(0, currentIndex + 1))
+        currentIndex++
+      } else {
+        clearInterval(typingInterval)
+      }
+    }, typingSpeed)
+
+    return () => clearInterval(typingInterval)
+  }, [])
+
+  // Mouse tracking for 3D effect
+  useEffect(() => {
+    const handleMouseMove = (e) => {
+      if (cardRef.current) {
+        const rect = cardRef.current.getBoundingClientRect()
+        const x = e.clientX - rect.left
+        const y = e.clientY - rect.top
+        const centerX = rect.width / 2
+        const centerY = rect.height / 2
+        const rotateX = (y - centerY) / 20
+        const rotateY = (centerX - x) / 20
+
+        setMousePosition({ x: rotateY, y: rotateX })
+        cardRef.current.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`
+      }
+    }
+
+    const handleMouseLeave = () => {
+      if (cardRef.current) {
+        cardRef.current.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg)'
+        setMousePosition({ x: 0, y: 0 })
+      }
+    }
+
+    const card = cardRef.current
+    if (card) {
+      card.addEventListener('mousemove', handleMouseMove)
+      card.addEventListener('mouseleave', handleMouseLeave)
+    }
+
+    return () => {
+      if (card) {
+        card.removeEventListener('mousemove', handleMouseMove)
+        card.removeEventListener('mouseleave', handleMouseLeave)
+      }
+    }
+  }, [])
+
+  // Counter animation for stats
+  useEffect(() => {
+    const counters = statsRef.current?.querySelectorAll('.stat-value')
+    if (!counters) return
+
+    const animateCounter = (counter, target) => {
+      let current = 0
+      const increment = target / 50
+      const timer = setInterval(() => {
+        current += increment
+        if (current >= target) {
+          counter.textContent = target + counter.dataset.suffix
+          clearInterval(timer)
+        } else {
+          counter.textContent = Math.floor(current) + counter.dataset.suffix
+        }
+      }, 30)
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          counters.forEach((counter) => {
+            const target = parseInt(counter.dataset.target)
+            animateCounter(counter, target)
+          })
+          observer.disconnect()
+        }
+      })
+    })
+
+    if (statsRef.current) {
+      observer.observe(statsRef.current)
+    }
+
+    return () => observer.disconnect()
+  }, [])
 
   useEffect(() => {
     // Kart animasyonu
@@ -123,10 +219,31 @@ const ProfileCard = () => {
   }
 
   return (
-    <div className={`min-h-screen transition-colors duration-300 ${darkMode ? 'bg-gray-900' : 'bg-gradient-to-b from-black to-white'}`}>
+    <div className={`min-h-screen transition-colors duration-300 ${darkMode ? 'bg-gray-900' : 'bg-gradient-to-b from-black to-white'} relative overflow-hidden`}>
+      {/* Animated Background Particles */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        {[...Array(20)].map((_, i) => (
+          <div
+            key={i}
+            className={`absolute ${darkMode ? 'bg-purple-500' : 'bg-white'} rounded-full opacity-20 animate-float`}
+            style={{
+              width: Math.random() * 100 + 20 + 'px',
+              height: Math.random() * 100 + 20 + 'px',
+              left: Math.random() * 100 + '%',
+              top: Math.random() * 100 + '%',
+              animationDelay: Math.random() * 5 + 's',
+              animationDuration: Math.random() * 10 + 10 + 's',
+            }}
+          />
+        ))}
+      </div>
+
       <div 
         ref={cardRef}
-        className={`${darkMode ? 'bg-gray-800' : 'bg-white'} rounded-xl shadow-[0px_8px_60px_-10px_rgba(13,28,39,0.6)] w-full max-w-2xl mx-auto relative transition-colors duration-300`}
+        className={`${darkMode ? 'bg-gray-800' : 'bg-white'} rounded-xl shadow-[0px_8px_60px_-10px_rgba(13,28,39,0.6)] w-full max-w-2xl mx-auto relative transition-all duration-300`}
+        style={{
+          transformStyle: 'preserve-3d',
+        }}
       >
         {/* Dark Mode Toggle */}
         <button
@@ -170,9 +287,10 @@ const ProfileCard = () => {
           </h2>
           <p 
             ref={titleRef}
-            className={`text-lg font-medium ${darkMode ? 'text-gray-300' : 'text-[#324e63]'} mb-6 transition-colors duration-300`}
+            className={`text-lg font-medium ${darkMode ? 'text-gray-300' : 'text-[#324e63]'} mb-6 transition-colors duration-300 min-h-[28px]`}
           >
-            Backend Developer
+            {typedText}
+            <span className="animate-pulse">|</span>
           </p>
 
           {/* Bio Section */}
@@ -197,7 +315,13 @@ const ProfileCard = () => {
                 className={`${darkMode ? 'bg-gray-700' : 'bg-gray-50'} rounded-lg px-4 py-3 min-w-[100px] transition-all duration-300 hover:scale-105 hover:shadow-lg`}
               >
                 <div className="text-2xl mb-1">{stat.icon}</div>
-                <div className={`${darkMode ? 'text-white' : 'text-gray-800'} font-bold text-lg`}>{stat.value}</div>
+                <div 
+                  className={`stat-value ${darkMode ? 'text-white' : 'text-gray-800'} font-bold text-lg`}
+                  data-target={stat.value}
+                  data-suffix={stat.suffix}
+                >
+                  0{stat.suffix}
+                </div>
                 <div className={`${darkMode ? 'text-gray-400' : 'text-gray-600'} text-xs`}>{stat.label}</div>
               </div>
             ))}
@@ -208,14 +332,29 @@ const ProfileCard = () => {
             <h3 className={`${darkMode ? 'text-gray-300' : 'text-gray-700'} text-sm font-semibold mb-4 transition-colors duration-300`}>
               Teknolojiler
             </h3>
-            <div className="flex justify-center items-center flex-wrap gap-3">
+            <div className="flex flex-col gap-4 px-4">
               {skills.map((skill, index) => (
-                <div
-                  key={index}
-                  className={`bg-gradient-to-br ${skill.color} w-14 h-14 rounded-lg flex items-center justify-center text-white font-bold text-sm shadow-lg transition-all duration-300 hover:scale-110 hover:rotate-3 cursor-default`}
-                  title={skill.name}
-                >
-                  {skill.icon}
+                <div key={index} className="w-full">
+                  <div className="flex justify-between items-center mb-2">
+                    <div className={`flex items-center gap-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>
+                      <div className={`bg-gradient-to-br ${skill.color} w-10 h-10 rounded-lg flex items-center justify-center text-white font-bold text-xs shadow-lg`}>
+                        {skill.icon}
+                      </div>
+                      <span className="font-medium text-sm">{skill.name}</span>
+                    </div>
+                    <span className={`text-xs font-semibold ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>
+                      {skill.level}%
+                    </span>
+                  </div>
+                  <div className={`${darkMode ? 'bg-gray-700' : 'bg-gray-200'} h-2 rounded-full overflow-hidden`}>
+                    <div
+                      className={`bg-gradient-to-r ${skill.color} h-full rounded-full transition-all duration-1000 ease-out`}
+                      style={{
+                        width: '0%',
+                        animation: `fillProgress 1.5s ease-out ${index * 0.2}s forwards`,
+                      }}
+                    />
+                  </div>
                 </div>
               ))}
             </div>

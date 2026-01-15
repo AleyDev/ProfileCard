@@ -181,7 +181,7 @@ const ProfileCard = () => {
   }
 
   return (
-    <div className={`min-h-screen transition-colors duration-300 ${darkMode ? 'bg-gray-900' : 'bg-gradient-to-b from-black to-white'} relative overflow-hidden`}>
+    <div className={`fixed inset-0 transition-colors duration-300 ${darkMode ? 'bg-gray-900' : 'bg-gradient-to-b from-black to-white'} relative overflow-hidden`}>
       {/* Animated Background Particles */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         {[...Array(20)].map((_, i) => (
@@ -200,14 +200,15 @@ const ProfileCard = () => {
         ))}
       </div>
 
-      <div 
-        ref={cardRef}
-        className={`${darkMode ? 'bg-gray-800' : 'bg-white'} rounded-xl shadow-[0px_8px_60px_-10px_rgba(13,28,39,0.6)] w-full max-w-2xl mx-auto relative pt-20`}
-        style={{
-          transformStyle: 'preserve-3d',
-          transition: 'transform 0.5s ease-out',
-        }}
-      >
+      <div className="w-full h-full flex items-center justify-center p-4">
+        <div 
+          ref={cardRef}
+          className={`${darkMode ? 'bg-gray-800' : 'bg-white'} rounded-xl shadow-[0px_8px_60px_-10px_rgba(13,28,39,0.6)] w-[500px] h-[500px] mx-auto relative pt-20`}
+          style={{
+            transformStyle: 'preserve-3d',
+            transition: 'transform 0.5s ease-out',
+          }}
+        >
         {/* Dark Mode Toggle */}
         <button
           onClick={toggleDarkMode}
@@ -241,31 +242,31 @@ const ProfileCard = () => {
         </div>
 
         {/* Content */}
-        <div className="mt-[-35px] text-center px-5 pb-10">
+        <div className="mt-[-35px] text-center px-4 pb-6">
           <h2 
             ref={nameRef}
-            className={`text-2xl font-bold ${darkMode ? 'text-purple-400' : 'text-[#6944ff]'} mb-2 mt-16 transition-colors duration-300`}
+            className={`text-xl font-bold ${darkMode ? 'text-purple-400' : 'text-[#6944ff]'} mb-1 mt-14 transition-colors duration-300`}
           >
             Aleyna Kaya
           </h2>
           <p 
             ref={titleRef}
-            className={`text-lg font-medium ${darkMode ? 'text-gray-300' : 'text-[#324e63]'} mb-6 transition-colors duration-300 min-h-[28px]`}
+            className={`text-base font-medium ${darkMode ? 'text-gray-300' : 'text-[#324e63]'} mb-4 transition-colors duration-300 min-h-[24px]`}
           >
             {typedText}
             <span className="animate-pulse">|</span>
           </p>
 
           {/* Skills Section */}
-          <div ref={skillsRef} className="mb-8">
-            <h3 className={`${darkMode ? 'text-gray-300' : 'text-gray-700'} text-sm font-semibold mb-4 transition-colors duration-300`}>
+          <div ref={skillsRef} className="mb-4">
+            <h3 className={`${darkMode ? 'text-gray-300' : 'text-gray-700'} text-xs font-semibold mb-3 transition-colors duration-300`}>
               Teknolojiler
             </h3>
-            <div className="flex justify-center items-center flex-wrap gap-3">
+            <div className="flex justify-center items-center flex-wrap gap-2">
               {skills.map((skill, index) => (
                 <div
                   key={index}
-                  className={`bg-gradient-to-br ${skill.color} w-14 h-14 rounded-lg flex items-center justify-center text-white shadow-lg transition-all duration-300 hover:scale-110 hover:rotate-3 cursor-default p-2`}
+                  className={`bg-gradient-to-br ${skill.color} w-12 h-12 rounded-lg flex items-center justify-center text-white shadow-lg transition-all duration-300 hover:scale-110 hover:rotate-3 cursor-default p-2`}
                   title={skill.name}
                 >
                   {skill.icon}
@@ -277,7 +278,7 @@ const ProfileCard = () => {
           {/* Social Links */}
           <div 
             ref={socialRef}
-            className="flex justify-center items-center flex-wrap mt-6 gap-4"
+            className="flex justify-center items-center flex-wrap mt-4 gap-3"
           >
             <a
               href="https://github.com/aleydev"
@@ -315,11 +316,11 @@ const ProfileCard = () => {
           </div>
 
           {/* Action Buttons */}
-          <div className="flex justify-center items-center gap-4 mt-10 flex-wrap">
+          <div className="flex justify-center items-center gap-3 mt-6 flex-wrap">
             <a 
               ref={buttonRef}
               href="mailto:devaleykaya@gmail.com"
-              className="bg-gradient-to-r from-[#1da1f2] to-[#0e71c8] text-white font-bold text-lg px-10 py-4 rounded-full min-w-[201px] min-h-[55px] shadow-[0px_4px_30px_rgba(19,127,212,0.4)] transition-all duration-300 hover:shadow-[0px_7px_30px_rgba(19,127,212,0.75)] hover:-translate-y-2 hover:scale-105 cursor-pointer inline-block text-center"
+              className="bg-gradient-to-r from-[#1da1f2] to-[#0e71c8] text-white font-bold text-sm px-6 py-2.5 rounded-full min-w-[160px] shadow-[0px_4px_30px_rgba(19,127,212,0.4)] transition-all duration-300 hover:shadow-[0px_7px_30px_rgba(19,127,212,0.75)] hover:-translate-y-1 hover:scale-105 cursor-pointer inline-block text-center"
             >
               Mesaj Gönder
             </a>
@@ -330,14 +331,15 @@ const ProfileCard = () => {
                 // CV indirme işlevi buraya eklenebilir
                 alert('CV indirme özelliği yakında eklenecek!')
               }}
-              className={`${darkMode ? 'bg-gray-700' : 'bg-gray-600'} w-[55px] h-[55px] rounded-full flex items-center justify-center text-white shadow-lg transition-all duration-300 hover:scale-125 hover:rotate-6`}
+              className={`${darkMode ? 'bg-gray-700' : 'bg-gray-600'} w-[45px] h-[45px] rounded-full flex items-center justify-center text-white shadow-lg transition-all duration-300 hover:scale-125 hover:rotate-6`}
               title="CV İndir"
             >
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
               </svg>
             </a>
           </div>
+        </div>
         </div>
       </div>
     </div>

@@ -8,6 +8,7 @@ const ProfileCard = () => {
   const imageRef = useRef(null)
   const nameRef = useRef(null)
   const titleRef = useRef(null)
+  const skillsRef = useRef(null)
   const socialRef = useRef(null)
   const buttonRef = useRef(null)
 

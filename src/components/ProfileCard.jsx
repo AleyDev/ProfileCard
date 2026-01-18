@@ -160,7 +160,7 @@ const ProfileCard = () => {
       <div className="w-full h-full flex items-center justify-center p-4">
         <div 
           ref={cardRef}
-          className={`${darkMode ? 'bg-gray-800' : 'bg-white'} rounded-xl shadow-[0px_8px_60px_-10px_rgba(13,28,39,0.6)] w-[500px] h-[500px] mx-auto relative pt-16`}
+          className={`${darkMode ? 'bg-gray-800' : 'bg-white'} rounded-xl shadow-[0px_8px_60px_-10px_rgba(13,28,39,0.6)] w-[500px] h-[500px] relative pt-16`}
           style={{
             transformStyle: 'preserve-3d',
             transition: 'transform 0.5s ease-out',

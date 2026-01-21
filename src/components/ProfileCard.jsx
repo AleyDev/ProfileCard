@@ -138,20 +138,20 @@ const ProfileCard = () => {
   }
 
   return (
-    <div className={`fixed inset-0 transition-colors duration-300 ${darkMode ? 'bg-gray-900' : 'bg-gradient-to-b from-black to-white'} relative overflow-hidden`}>
+    <div className={`fixed inset-0 transition-colors duration-300 ${darkMode ? 'bg-gradient-to-br from-gray-900 via-purple-900/20 to-gray-900' : 'bg-gradient-to-br from-slate-50 via-purple-50/30 to-white'} relative overflow-hidden`}>
       {/* Animated Background Particles */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {[...Array(20)].map((_, i) => (
+        {[...Array(15)].map((_, i) => (
           <div
             key={i}
-            className={`absolute ${darkMode ? 'bg-purple-500' : 'bg-white'} rounded-full opacity-20 animate-float`}
+            className={`absolute ${darkMode ? 'bg-purple-500/30' : 'bg-purple-400/20'} rounded-full blur-xl animate-float`}
             style={{
-              width: Math.random() * 100 + 20 + 'px',
-              height: Math.random() * 100 + 20 + 'px',
+              width: Math.random() * 150 + 30 + 'px',
+              height: Math.random() * 150 + 30 + 'px',
               left: Math.random() * 100 + '%',
               top: Math.random() * 100 + '%',
               animationDelay: Math.random() * 5 + 's',
-              animationDuration: Math.random() * 10 + 10 + 's',
+              animationDuration: Math.random() * 15 + 15 + 's',
             }}
           />
         ))}
@@ -160,10 +160,13 @@ const ProfileCard = () => {
       <div className="w-full h-full flex items-center justify-center p-4">
         <div 
           ref={cardRef}
-          className={`${darkMode ? 'bg-gray-800' : 'bg-white'} rounded-xl shadow-[0px_8px_60px_-10px_rgba(13,28,39,0.6)] w-[380px] h-[450px] relative pt-14`}
+          className={`${darkMode ? 'bg-gray-800/90 backdrop-blur-xl' : 'bg-white/90 backdrop-blur-xl'} rounded-2xl shadow-[0px_8px_60px_-10px_rgba(13,28,39,0.6)] w-[380px] h-[450px] relative pt-14 border ${darkMode ? 'border-gray-700/50' : 'border-gray-200/50'}`}
           style={{
             transformStyle: 'preserve-3d',
             transition: 'transform 0.5s ease-out',
+            boxShadow: darkMode 
+              ? '0px 8px 60px -10px rgba(139, 92, 246, 0.3), 0px 0px 0px 1px rgba(139, 92, 246, 0.1)' 
+              : '0px 8px 60px -10px rgba(105, 68, 255, 0.2), 0px 0px 0px 1px rgba(105, 68, 255, 0.1)',
           }}
         >
         {/* Dark Mode Toggle */}
@@ -180,15 +183,16 @@ const ProfileCard = () => {
         </button>
 
         {/* Profile Image */}
-        <div className="flex justify-center -mt-[60px] relative z-10">
+        <div className="flex justify-center -mt-[50px] relative z-10">
           <div 
-            className={`w-[120px] h-[120px] rounded-full overflow-hidden transition-all duration-300 hover:scale-110 cursor-pointer group`}
+            className={`w-[100px] h-[100px] rounded-full overflow-hidden transition-all duration-300 hover:scale-110 cursor-pointer group relative`}
             style={{
               boxShadow: darkMode 
-                ? '0px 5px 50px 0px rgba(55, 65, 81, 0.5), 0px 0px 0px 6px #374151' 
-                : '0px 5px 50px 0px rgba(248, 248, 255, 0.8), 0px 0px 0px 6px #f5f5f5'
+                ? '0px 5px 50px 0px rgba(139, 92, 246, 0.4), 0px 0px 0px 4px rgba(139, 92, 246, 0.2)' 
+                : '0px 5px 50px 0px rgba(105, 68, 255, 0.3), 0px 0px 0px 4px rgba(105, 68, 255, 0.1)',
             }}
           >
+            <div className={`absolute inset-0 rounded-full ${darkMode ? 'bg-gradient-to-br from-purple-500/20 to-pink-500/20' : 'bg-gradient-to-br from-purple-400/20 to-pink-400/20'} animate-pulse opacity-0 group-hover:opacity-100 transition-opacity duration-300`}></div>
             <img
               ref={imageRef}
               src="/aleyna_profile_card.jpg"
@@ -202,7 +206,7 @@ const ProfileCard = () => {
         <div className="mt-[-30px] text-center px-4 pb-5">
           <h2 
             ref={nameRef}
-            className={`text-lg font-bold ${darkMode ? 'text-purple-400' : 'text-[#6944ff]'} mb-1 mt-12 transition-colors duration-300`}
+            className={`text-lg font-bold bg-gradient-to-r ${darkMode ? 'from-purple-400 to-pink-400' : 'from-[#6944ff] to-[#9333ea]'} bg-clip-text text-transparent mb-1 mt-12 transition-all duration-300 hover:scale-105 inline-block`}
           >
             Aleyna Kaya
           </h2>
@@ -223,7 +227,7 @@ const ProfileCard = () => {
               href="https://github.com/aleydev"
               target="_blank"
               rel="noopener noreferrer"
-              className="w-[40px] h-[40px] rounded-full flex items-center justify-center text-white bg-gradient-to-br from-[#333333] to-[#626b73] shadow-[0px_7px_30px_rgba(63,65,67,0.6)] transition-all duration-300 hover:scale-125 hover:rotate-6"
+              className="w-[40px] h-[40px] rounded-full flex items-center justify-center text-white bg-gradient-to-br from-[#333333] to-[#626b73] shadow-[0px_7px_30px_rgba(63,65,67,0.6)] transition-all duration-300 hover:scale-125 hover:rotate-6 hover:shadow-[0px_10px_40px_rgba(63,65,67,0.8)]"
               aria-label="GitHub"
             >
               <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
@@ -259,9 +263,10 @@ const ProfileCard = () => {
             <a 
               ref={buttonRef}
               href="mailto:devaleykaya@gmail.com"
-              className="bg-gradient-to-r from-[#1da1f2] to-[#0e71c8] text-white font-bold text-xs px-5 py-2 rounded-full min-w-[140px] shadow-[0px_4px_30px_rgba(19,127,212,0.4)] transition-all duration-300 hover:shadow-[0px_7px_30px_rgba(19,127,212,0.75)] hover:-translate-y-1 hover:scale-105 cursor-pointer inline-block text-center"
+              className="bg-gradient-to-r from-[#1da1f2] via-[#0e71c8] to-[#6944ff] text-white font-bold text-xs px-5 py-2 rounded-full min-w-[140px] shadow-[0px_4px_30px_rgba(19,127,212,0.4)] transition-all duration-300 hover:shadow-[0px_8px_40px_rgba(105,68,255,0.6)] hover:-translate-y-1 hover:scale-105 cursor-pointer inline-block text-center relative overflow-hidden group"
             >
-              Mesaj Gönder
+              <span className="relative z-10">Mesaj Gönder</span>
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700"></div>
             </a>
             <a 
               href="#"

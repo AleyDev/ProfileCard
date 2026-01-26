@@ -138,152 +138,224 @@ const ProfileCard = () => {
   }
 
   return (
-    <div className={`fixed inset-0 transition-colors duration-300 ${darkMode ? 'bg-gradient-to-br from-gray-900 via-purple-900/20 to-gray-900' : 'bg-gradient-to-br from-slate-50 via-purple-50/30 to-white'} relative overflow-hidden`}>
-      {/* Animated Background Particles */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {[...Array(15)].map((_, i) => (
+    <div className={`w-full min-h-screen flex items-center justify-center p-4 ${darkMode ? 'bg-black' : 'bg-gradient-to-br from-slate-50 via-purple-50/30 to-white'}`}>
+      {/* Dark Mode: Green Hacker Theme */}
+      {darkMode && (
+        <>
+          {/* Full Screen Green Background */}
+          <div className="absolute inset-0 bg-gradient-to-br from-green-950 via-green-900 to-green-950 transition-opacity duration-500"></div>
+
+          {/* Matrix/Code Rain Effect */}
+          <div className="absolute inset-0 overflow-hidden pointer-events-none">
+            {[...Array(80)].map((_, i) => (
+              <div
+                key={i}
+                className="absolute text-green-400/30 font-mono text-xs"
+                style={{
+                  left: `${(i * 1.25) % 100}%`,
+                  top: `${-Math.random() * 100}%`,
+                  animationDelay: `${Math.random() * 5}s`,
+                  animationDuration: `${Math.random() * 10 + 10}s`,
+                  animation: 'matrix-rain 15s linear infinite',
+                }}
+              >
+                {String.fromCharCode(0x30A0 + Math.random() * 96)}
+              </div>
+            ))}
+          </div>
+
+          {/* Grid Pattern */}
           <div
-            key={i}
-            className={`absolute ${darkMode ? 'bg-purple-500/30' : 'bg-purple-400/20'} rounded-full blur-xl animate-float`}
+            className="absolute inset-0 opacity-20 transition-opacity duration-500"
             style={{
-              width: Math.random() * 150 + 30 + 'px',
-              height: Math.random() * 150 + 30 + 'px',
-              left: Math.random() * 100 + '%',
-              top: Math.random() * 100 + '%',
-              animationDelay: Math.random() * 5 + 's',
-              animationDuration: Math.random() * 15 + 15 + 's',
+              backgroundImage: `
+                linear-gradient(rgba(0, 255, 0, 0.15) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 255, 0, 0.15) 1px, transparent 1px)
+              `,
+              backgroundSize: '50px 50px',
             }}
           />
-        ))}
-      </div>
 
-      <div className="w-full h-full flex items-center justify-center p-4">
-        <div 
-          ref={cardRef}
-          className={`${darkMode ? 'bg-gray-800/90 backdrop-blur-xl' : 'bg-white/90 backdrop-blur-xl'} rounded-2xl shadow-[0px_8px_60px_-10px_rgba(13,28,39,0.6)] w-[350px] h-[350px] relative pt-16 pb-6 px-6 border ${darkMode ? 'border-gray-700/50' : 'border-gray-200/50'} flex flex-col`}
-          style={{
-            transformStyle: 'preserve-3d',
-            transition: 'transform 0.5s ease-out',
-            boxShadow: darkMode 
-              ? '0px 8px 60px -10px rgba(139, 92, 246, 0.3), 0px 0px 0px 1px rgba(139, 92, 246, 0.1)' 
-              : '0px 8px 60px -10px rgba(105, 68, 255, 0.2), 0px 0px 0px 1px rgba(105, 68, 255, 0.1)',
-          }}
-        >
-        {/* Dark Mode Toggle */}
-        <button
-          onClick={toggleDarkMode}
-          className={`absolute top-3 right-3 w-10 h-10 rounded-full ${darkMode ? 'bg-gradient-to-br from-yellow-400 to-yellow-600' : 'bg-gradient-to-br from-gray-700 to-gray-900'} flex items-center justify-center shadow-lg transition-all duration-300 hover:scale-110 z-20`}
-          aria-label="Toggle dark mode"
-        >
-          {darkMode ? (
-            <span className="text-xl">☀️</span>
-          ) : (
-            <span className="text-xl">🌙</span>
-          )}
-        </button>
+          {/* Green Glow Effects */}
+          <div className="absolute inset-0 overflow-hidden pointer-events-none">
+            {[...Array(12)].map((_, i) => (
+              <div
+                key={i}
+                className="absolute bg-green-500/30 rounded-full blur-3xl"
+                style={{
+                  width: Math.random() * 400 + 200 + 'px',
+                  height: Math.random() * 400 + 200 + 'px',
+                  left: Math.random() * 100 + '%',
+                  top: Math.random() * 100 + '%',
+                  animationDelay: Math.random() * 5 + 's',
+                  animationDuration: Math.random() * 20 + 20 + 's',
+                  animation: 'float 20s ease-in-out infinite',
+                }}
+              />
+            ))}
+          </div>
+        </>
+      )}
 
-        {/* Profile Image */}
-        <div className="flex justify-center -mt-[45px] mb-4">
-          <div 
-            className={`w-[100px] h-[100px] rounded-full overflow-hidden transition-all duration-300 hover:scale-110 cursor-pointer group relative`}
+
+      {/* Light Mode: Purple Particles */}
+      {!darkMode && (
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          {[...Array(15)].map((_, i) => (
+            <div
+              key={i}
+              className="absolute bg-purple-400/20 rounded-full blur-xl animate-float"
+              style={{
+                width: Math.random() * 150 + 30 + 'px',
+                height: Math.random() * 150 + 30 + 'px',
+                left: Math.random() * 100 + '%',
+                top: Math.random() * 100 + '%',
+                animationDelay: Math.random() * 5 + 's',
+                animationDuration: Math.random() * 15 + 15 + 's',
+              }}
+            />
+          ))}
+        </div>
+      )}
+
+      <div className={`fixed inset-0 transition-all duration-500 relative overflow-hidden`}>
+
+
+
+
+        <div className="w-full h-full flex items-center justify-center p-4">
+          {/* Card Background Area */}
+          <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+            <div className={`w-[400px] h-[400px] rounded-3xl transition-all duration-500 ${darkMode ? 'bg-green-900/30' : 'bg-purple-100/30'} blur-3xl`}></div>
+          </div>
+
+          <div
+            ref={cardRef}
+            className={`${darkMode ? 'bg-black/90 backdrop-blur-xl' : 'bg-white/90 backdrop-blur-xl'} rounded-2xl shadow-[0px_8px_60px_-10px_rgba(13,28,39,0.6)] w-[350px] h-[350px] relative pt-16 pb-6 px-6 border ${darkMode ? 'border-green-500/30' : 'border-gray-200/50'} flex flex-col z-10 transition-all duration-500`}
             style={{
-              boxShadow: darkMode 
-                ? '0px 5px 50px 0px rgba(139, 92, 246, 0.4), 0px 0px 0px 4px rgba(139, 92, 246, 0.2)' 
-                : '0px 5px 50px 0px rgba(105, 68, 255, 0.3), 0px 0px 0px 4px rgba(105, 68, 255, 0.1)',
+              transformStyle: 'preserve-3d',
+              transition: 'transform 0.5s ease-out, background-color 0.5s ease, border-color 0.5s ease',
+              boxShadow: darkMode
+                ? '0px 8px 60px -10px rgba(0, 255, 0, 0.3), 0px 0px 0px 1px rgba(0, 255, 0, 0.1), inset 0px 0px 20px rgba(0, 255, 0, 0.05)'
+                : '0px 8px 60px -10px rgba(105, 68, 255, 0.2), 0px 0px 0px 1px rgba(105, 68, 255, 0.1)',
             }}
           >
-            <div className={`absolute inset-0 rounded-full ${darkMode ? 'bg-gradient-to-br from-purple-500/20 to-pink-500/20' : 'bg-gradient-to-br from-purple-400/20 to-pink-400/20'} animate-pulse opacity-0 group-hover:opacity-100 transition-opacity duration-300`}></div>
-            <img
-              ref={imageRef}
-              src="/aleyna_profile_card.jpg"
-              alt="Aleyna Kaya"
-              className="w-full h-full object-cover rounded-full transition-transform duration-300 group-hover:scale-110"
-            />
-          </div>
-        </div>
+            {/* Dark Mode Toggle */}
+            <button
+              onClick={toggleDarkMode}
+              className={`absolute top-3 right-3 w-10 h-10 rounded-full ${darkMode ? 'bg-gradient-to-br from-yellow-400 to-yellow-600' : 'bg-gradient-to-br from-gray-700 to-gray-900'} flex items-center justify-center shadow-lg transition-all duration-300 hover:scale-110 z-20`}
+              aria-label="Toggle dark mode"
+            >
+              {darkMode ? (
+                <span className="text-xl">☀️</span>
+              ) : (
+                <span className="text-xl">🌙</span>
+              )}
+            </button>
 
-        {/* Content */}
-        <div className="flex-1 flex flex-col justify-center items-center text-center w-full">
-          <h2 
-            ref={nameRef}
-            className={`text-lg font-bold bg-gradient-to-r ${darkMode ? 'from-purple-400 to-pink-400' : 'from-[#6944ff] to-[#9333ea]'} bg-clip-text text-transparent mb-1 transition-all duration-300 hover:scale-105 text-center`}
-          >
-            Aleyna Kaya
-          </h2>
-          <p 
-            ref={titleRef}
-            className={`text-sm font-medium ${darkMode ? 'text-gray-300' : 'text-[#324e63]'} mb-4 transition-colors duration-300 min-h-[20px] text-center`}
-          >
-            {typedText}
-            <span className="animate-pulse">|</span>
-          </p>
+            {/* Profile Image */}
+            <div className="flex justify-center -mt-[45px] mb-4">
+              <div
+                className={`w-[100px] h-[100px] rounded-full overflow-hidden transition-all duration-300 hover:scale-110 cursor-pointer group relative`}
+                style={{
+                  boxShadow: darkMode
+                    ? '0px 5px 50px 0px rgba(0, 255, 0, 0.4), 0px 0px 0px 4px rgba(0, 255, 0, 0.2)'
+                    : '0px 5px 50px 0px rgba(105, 68, 255, 0.3), 0px 0px 0px 4px rgba(105, 68, 255, 0.1)',
+                }}
+              >
+                <div className={`absolute inset-0 rounded-full ${darkMode ? 'bg-gradient-to-br from-green-500/30 to-emerald-500/30' : 'bg-gradient-to-br from-purple-400/20 to-pink-400/20'} animate-pulse opacity-0 group-hover:opacity-100 transition-opacity duration-300`}></div>
+                <img
+                  ref={imageRef}
+                  src="/aleyna_profile_card.jpg"
+                  alt="Aleyna Kaya"
+                  className="w-full h-full object-cover rounded-full transition-transform duration-300 group-hover:scale-110"
+                />
+              </div>
+            </div>
 
-          {/* Social Links */}
-          <div 
-            ref={socialRef}
-            className="flex justify-center items-center flex-wrap gap-2.5 mb-4"
-          >
-            <a
-              href="https://github.com/aleydev"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-[45px] h-[45px] rounded-full flex items-center justify-center text-white bg-gradient-to-br from-[#333333] to-[#626b73] shadow-[0px_7px_30px_rgba(63,65,67,0.6)] transition-all duration-300 hover:scale-125 hover:rotate-6 hover:shadow-[0px_10px_40px_rgba(63,65,67,0.8)]"
-              aria-label="GitHub"
-            >
-              <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-              </svg>
-            </a>
-            <a
-              href="https://www.instagram.com/_aaleynakaya"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-[45px] h-[45px] rounded-full flex items-center justify-center text-white bg-gradient-to-r from-[#405de6] via-[#5851db] via-[#833ab4] via-[#c13584] via-[#e1306c] to-[#fd1d1d] shadow-[0px_4px_30px_rgba(120,64,190,0.6)] transition-all duration-300 hover:scale-125 hover:-rotate-6"
-              aria-label="Instagram"
-            >
-              <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
-              </svg>
-            </a>
-            <a
-              href="https://medium.com/@aleynakayaa"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-[45px] h-[45px] rounded-full flex items-center justify-center text-white bg-gradient-to-br from-[#000000] to-[#191919] shadow-[0px_7px_30px_rgba(0,0,0,0.6)] transition-all duration-300 hover:scale-125 hover:rotate-6"
-              aria-label="Medium"
-            >
-              <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M13.54 12a6.8 6.8 0 01-6.77 6.82A6.8 6.8 0 010 12a6.8 6.8 0 016.77-6.82A6.8 6.8 0 0113.54 12zM20.96 12c0 3.54-1.51 6.42-3.38 6.42-1.87 0-3.39-2.88-3.39-6.42s1.52-6.42 3.39-6.42 3.38 2.88 3.38 6.42M24 12c0 3.17-.53 5.75-1.19 5.75-.66 0-1.19-2.58-1.19-5.75s.53-5.75 1.19-5.75C23.47 6.25 24 8.83 24 12z"/>
-              </svg>
-            </a>
-          </div>
+            {/* Content */}
+            <div className="flex-1 flex flex-col justify-center items-center text-center w-full">
+              <h2
+                ref={nameRef}
+                className={`text-lg font-bold bg-gradient-to-r ${darkMode ? 'from-green-400 to-emerald-400' : 'from-[#6944ff] to-[#9333ea]'} bg-clip-text text-transparent mb-1 transition-all duration-300 hover:scale-105 text-center`}
+              >
+                Aleyna Kaya
+              </h2>
+              <p
+                ref={titleRef}
+                className={`text-sm font-medium ${darkMode ? 'text-green-400' : 'text-[#324e63]'} mb-4 transition-colors duration-300 min-h-[20px] text-center`}
+              >
+                {typedText}
+                <span className="animate-pulse">|</span>
+              </p>
 
-          {/* Action Buttons */}
-          <div className="flex justify-center items-center gap-2.5 flex-wrap">
-            <a 
-              ref={buttonRef}
-              href="mailto:devaleykaya@gmail.com"
-              className="bg-gradient-to-r from-[#1da1f2] via-[#0e71c8] to-[#6944ff] text-white font-bold text-xs px-5 py-2 rounded-full min-w-[140px] shadow-[0px_4px_30px_rgba(19,127,212,0.4)] transition-all duration-300 hover:shadow-[0px_8px_40px_rgba(105,68,255,0.6)] hover:-translate-y-1 hover:scale-105 cursor-pointer inline-block text-center relative overflow-hidden group"
-            >
-              <span className="relative z-10">Mesaj Gönder</span>
-              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700"></div>
-            </a>
-            <a 
-              href="#"
-              onClick={(e) => {
-                e.preventDefault()
-                // CV indirme işlevi buraya eklenebilir
-                alert('CV indirme özelliği yakında eklenecek!')
-              }}
-              className={`${darkMode ? 'bg-gray-700' : 'bg-gray-600'} w-[45px] h-[45px] rounded-full flex items-center justify-center text-white shadow-lg transition-all duration-300 hover:scale-125 hover:rotate-6`}
-              title="CV İndir"
-            >
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-              </svg>
-            </a>
+              {/* Social Links */}
+              <div
+                ref={socialRef}
+                className="flex justify-center items-center flex-wrap gap-2.5 mb-4"
+              >
+                <a
+                  href="https://github.com/aleydev"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-[45px] h-[45px] rounded-full flex items-center justify-center text-white bg-gradient-to-br from-[#333333] to-[#626b73] shadow-[0px_7px_30px_rgba(63,65,67,0.6)] transition-all duration-300 hover:scale-125 hover:rotate-6 hover:shadow-[0px_10px_40px_rgba(63,65,67,0.8)]"
+                  aria-label="GitHub"
+                >
+                  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+                  </svg>
+                </a>
+                <a
+                  href="https://www.instagram.com/_aaleynakaya"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-[45px] h-[45px] rounded-full flex items-center justify-center text-white bg-gradient-to-r from-[#405de6] via-[#5851db] via-[#833ab4] via-[#c13584] via-[#e1306c] to-[#fd1d1d] shadow-[0px_4px_30px_rgba(120,64,190,0.6)] transition-all duration-300 hover:scale-125 hover:-rotate-6"
+                  aria-label="Instagram"
+                >
+                  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+                  </svg>
+                </a>
+                <a
+                  href="https://medium.com/@aleynakayaa"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-[45px] h-[45px] rounded-full flex items-center justify-center text-white bg-gradient-to-br from-[#000000] to-[#191919] shadow-[0px_7px_30px_rgba(0,0,0,0.6)] transition-all duration-300 hover:scale-125 hover:rotate-6"
+                  aria-label="Medium"
+                >
+                  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M13.54 12a6.8 6.8 0 01-6.77 6.82A6.8 6.8 0 010 12a6.8 6.8 0 016.77-6.82A6.8 6.8 0 0113.54 12zM20.96 12c0 3.54-1.51 6.42-3.38 6.42-1.87 0-3.39-2.88-3.39-6.42s1.52-6.42 3.39-6.42 3.38 2.88 3.38 6.42M24 12c0 3.17-.53 5.75-1.19 5.75-.66 0-1.19-2.58-1.19-5.75s.53-5.75 1.19-5.75C23.47 6.25 24 8.83 24 12z" />
+                  </svg>
+                </a>
+              </div>
+
+              {/* Action Buttons */}
+              <div className="flex justify-center items-center gap-2.5 flex-wrap">
+                <a
+                  ref={buttonRef}
+                  href="mailto:devaleykaya@gmail.com"
+                  className="bg-gradient-to-r from-[#1da1f2] via-[#0e71c8] to-[#6944ff] text-white font-bold text-xs px-5 py-2 rounded-full min-w-[140px] shadow-[0px_4px_30px_rgba(19,127,212,0.4)] transition-all duration-300 hover:shadow-[0px_8px_40px_rgba(105,68,255,0.6)] hover:-translate-y-1 hover:scale-105 cursor-pointer inline-block text-center relative overflow-hidden group"
+                >
+                  <span className="relative z-10">Mesaj Gönder</span>
+                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700"></div>
+                </a>
+                <a
+                  href="#"
+                  onClick={(e) => {
+                    e.preventDefault()
+                    // CV indirme işlevi buraya eklenebilir
+                    alert('CV indirme özelliği yakında eklenecek!')
+                  }}
+                  className={`${darkMode ? 'bg-gray-700' : 'bg-gray-600'} w-[45px] h-[45px] rounded-full flex items-center justify-center text-white shadow-lg transition-all duration-300 hover:scale-125 hover:rotate-6`}
+                  title="CV İndir"
+                >
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                  </svg>
+                </a>
+              </div>
+            </div>
           </div>
-        </div>
         </div>
       </div>
     </div>

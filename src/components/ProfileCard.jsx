@@ -138,34 +138,99 @@ const ProfileCard = () => {
   }
 
   return (
-    <div className={`fixed inset-0 transition-colors duration-300 ${darkMode ? 'bg-gradient-to-br from-gray-900 via-purple-900/20 to-gray-900' : 'bg-gradient-to-br from-slate-50 via-purple-50/30 to-white'} relative overflow-hidden`}>
-      {/* Animated Background Particles */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {[...Array(15)].map((_, i) => (
-          <div
-            key={i}
-            className={`absolute ${darkMode ? 'bg-purple-500/30' : 'bg-purple-400/20'} rounded-full blur-xl animate-float`}
+    <div className={`fixed inset-0 transition-all duration-500 ${darkMode ? 'bg-black' : 'bg-gradient-to-br from-slate-50 via-purple-50/30 to-white'} relative overflow-hidden`}>
+      {/* Dark Mode: Green Hacker Theme */}
+      {darkMode && (
+        <>
+          {/* Full Screen Green Background */}
+          <div className="absolute inset-0 bg-gradient-to-br from-green-950 via-green-900 to-green-950 transition-opacity duration-500"></div>
+          
+          {/* Matrix/Code Rain Effect */}
+          <div className="absolute inset-0 overflow-hidden pointer-events-none">
+            {[...Array(80)].map((_, i) => (
+              <div
+                key={i}
+                className="absolute text-green-400/30 font-mono text-xs"
+                style={{
+                  left: `${(i * 1.25) % 100}%`,
+                  top: `${-Math.random() * 100}%`,
+                  animationDelay: `${Math.random() * 5}s`,
+                  animationDuration: `${Math.random() * 10 + 10}s`,
+                  animation: 'matrix-rain 15s linear infinite',
+                }}
+              >
+                {String.fromCharCode(0x30A0 + Math.random() * 96)}
+              </div>
+            ))}
+          </div>
+
+          {/* Grid Pattern */}
+          <div 
+            className="absolute inset-0 opacity-20 transition-opacity duration-500"
             style={{
-              width: Math.random() * 150 + 30 + 'px',
-              height: Math.random() * 150 + 30 + 'px',
-              left: Math.random() * 100 + '%',
-              top: Math.random() * 100 + '%',
-              animationDelay: Math.random() * 5 + 's',
-              animationDuration: Math.random() * 15 + 15 + 's',
+              backgroundImage: `
+                linear-gradient(rgba(0, 255, 0, 0.15) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 255, 0, 0.15) 1px, transparent 1px)
+              `,
+              backgroundSize: '50px 50px',
             }}
           />
-        ))}
-      </div>
+
+          {/* Green Glow Effects */}
+          <div className="absolute inset-0 overflow-hidden pointer-events-none">
+            {[...Array(12)].map((_, i) => (
+              <div
+                key={i}
+                className="absolute bg-green-500/30 rounded-full blur-3xl"
+                style={{
+                  width: Math.random() * 400 + 200 + 'px',
+                  height: Math.random() * 400 + 200 + 'px',
+                  left: Math.random() * 100 + '%',
+                  top: Math.random() * 100 + '%',
+                  animationDelay: Math.random() * 5 + 's',
+                  animationDuration: Math.random() * 20 + 20 + 's',
+                  animation: 'float 20s ease-in-out infinite',
+                }}
+              />
+            ))}
+          </div>
+        </>
+      )}
+
+      {/* Light Mode: Purple Particles */}
+      {!darkMode && (
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          {[...Array(15)].map((_, i) => (
+            <div
+              key={i}
+              className="absolute bg-purple-400/20 rounded-full blur-xl animate-float"
+              style={{
+                width: Math.random() * 150 + 30 + 'px',
+                height: Math.random() * 150 + 30 + 'px',
+                left: Math.random() * 100 + '%',
+                top: Math.random() * 100 + '%',
+                animationDelay: Math.random() * 5 + 's',
+                animationDuration: Math.random() * 15 + 15 + 's',
+              }}
+            />
+          ))}
+        </div>
+      )}
 
       <div className="w-full h-full flex items-center justify-center p-4">
+        {/* Card Background Area */}
+        <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+          <div className={`w-[400px] h-[400px] rounded-3xl transition-all duration-500 ${darkMode ? 'bg-green-900/30' : 'bg-purple-100/30'} blur-3xl`}></div>
+        </div>
+        
         <div 
           ref={cardRef}
-          className={`${darkMode ? 'bg-gray-800/90 backdrop-blur-xl' : 'bg-white/90 backdrop-blur-xl'} rounded-2xl shadow-[0px_8px_60px_-10px_rgba(13,28,39,0.6)] w-[350px] h-[350px] relative pt-16 pb-6 px-6 border ${darkMode ? 'border-gray-700/50' : 'border-gray-200/50'} flex flex-col`}
+          className={`${darkMode ? 'bg-black/90 backdrop-blur-xl' : 'bg-white/90 backdrop-blur-xl'} rounded-2xl shadow-[0px_8px_60px_-10px_rgba(13,28,39,0.6)] w-[350px] h-[350px] relative pt-16 pb-6 px-6 border ${darkMode ? 'border-green-500/30' : 'border-gray-200/50'} flex flex-col z-10 transition-all duration-500`}
           style={{
             transformStyle: 'preserve-3d',
-            transition: 'transform 0.5s ease-out',
+            transition: 'transform 0.5s ease-out, background-color 0.5s ease, border-color 0.5s ease',
             boxShadow: darkMode 
-              ? '0px 8px 60px -10px rgba(139, 92, 246, 0.3), 0px 0px 0px 1px rgba(139, 92, 246, 0.1)' 
+              ? '0px 8px 60px -10px rgba(0, 255, 0, 0.3), 0px 0px 0px 1px rgba(0, 255, 0, 0.1), inset 0px 0px 20px rgba(0, 255, 0, 0.05)' 
               : '0px 8px 60px -10px rgba(105, 68, 255, 0.2), 0px 0px 0px 1px rgba(105, 68, 255, 0.1)',
           }}
         >
@@ -188,11 +253,11 @@ const ProfileCard = () => {
             className={`w-[100px] h-[100px] rounded-full overflow-hidden transition-all duration-300 hover:scale-110 cursor-pointer group relative`}
             style={{
               boxShadow: darkMode 
-                ? '0px 5px 50px 0px rgba(139, 92, 246, 0.4), 0px 0px 0px 4px rgba(139, 92, 246, 0.2)' 
+                ? '0px 5px 50px 0px rgba(0, 255, 0, 0.4), 0px 0px 0px 4px rgba(0, 255, 0, 0.2)' 
                 : '0px 5px 50px 0px rgba(105, 68, 255, 0.3), 0px 0px 0px 4px rgba(105, 68, 255, 0.1)',
             }}
           >
-            <div className={`absolute inset-0 rounded-full ${darkMode ? 'bg-gradient-to-br from-purple-500/20 to-pink-500/20' : 'bg-gradient-to-br from-purple-400/20 to-pink-400/20'} animate-pulse opacity-0 group-hover:opacity-100 transition-opacity duration-300`}></div>
+            <div className={`absolute inset-0 rounded-full ${darkMode ? 'bg-gradient-to-br from-green-500/30 to-emerald-500/30' : 'bg-gradient-to-br from-purple-400/20 to-pink-400/20'} animate-pulse opacity-0 group-hover:opacity-100 transition-opacity duration-300`}></div>
             <img
               ref={imageRef}
               src="/aleyna_profile_card.jpg"
@@ -206,13 +271,13 @@ const ProfileCard = () => {
         <div className="flex-1 flex flex-col justify-center items-center text-center w-full">
           <h2 
             ref={nameRef}
-            className={`text-lg font-bold bg-gradient-to-r ${darkMode ? 'from-purple-400 to-pink-400' : 'from-[#6944ff] to-[#9333ea]'} bg-clip-text text-transparent mb-1 transition-all duration-300 hover:scale-105 text-center`}
+            className={`text-lg font-bold bg-gradient-to-r ${darkMode ? 'from-green-400 to-emerald-400' : 'from-[#6944ff] to-[#9333ea]'} bg-clip-text text-transparent mb-1 transition-all duration-300 hover:scale-105 text-center`}
           >
             Aleyna Kaya
           </h2>
           <p 
             ref={titleRef}
-            className={`text-sm font-medium ${darkMode ? 'text-gray-300' : 'text-[#324e63]'} mb-4 transition-colors duration-300 min-h-[20px] text-center`}
+            className={`text-sm font-medium ${darkMode ? 'text-green-400' : 'text-[#324e63]'} mb-4 transition-colors duration-300 min-h-[20px] text-center`}
           >
             {typedText}
             <span className="animate-pulse">|</span>
